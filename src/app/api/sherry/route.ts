@@ -1,10 +1,15 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createMetadata, Metadata } from "@sherrylinks/sdk";
 
-export const GET = async (): Promise<NextResponse> => {
+export const GET = async (req: NextRequest): Promise<NextResponse> => {
+  const host = req.headers.get("host") || "localhost:3000";
+  const protocol = req.headers.get("x-forwarded-proto") || "http";
+  const serverUrl = `${protocol}://${host}`;
+
   const metadata: Metadata = {
-    url: process.env.PUBLIC_URL ?? "",
-    icon: "random.png",
+    url: "https://sherry.social",
+    baseUrl: serverUrl,
+    icon: `${process.env.PUBLIC_URL}/vote.png`,
     title: "Mint Cosmic NFT",
     description: "Mint exclusive NFTs directly from social media",
     actions: [
@@ -13,7 +18,7 @@ export const GET = async (): Promise<NextResponse> => {
         label: "Binary Public Voting Feed",
         description: "Vote on the latest public voting feed",
         chains: { source: "fuji" },
-        path: "/api/vote",
+        path: "/api/sherry",
         params: [
           {
             name: "selectedCandidate",
