@@ -54,6 +54,12 @@ const ProposalsList = () => {
     window.open(sherryUrl, '_blank');
   };
 
+  const handleCreateProposal = () => {
+    const createUrl = `${baseUrl}/api/proposal`;
+    const sherryUrl = `https://app.sherry.social/action?url=${encodeURIComponent(createUrl)}`;
+    window.open(sherryUrl, '_blank');
+  };
+
   const formatTimeAgo = (timestamp: number) => {
     const now = Date.now();
     const time = timestamp * 1000; // timestamp is already a number
@@ -121,6 +127,39 @@ const ProposalsList = () => {
       </div>
 
       <div className="space-y-4">
+        {/* Add New Proposal Button */}
+        <div
+          onClick={handleCreateProposal}
+          className="group bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl border-2 border-dashed border-blue-300 hover:border-blue-400 hover:shadow-lg transition-all duration-200 cursor-pointer overflow-hidden"
+        >
+          <div className="p-6 flex items-center justify-center min-h-[140px]">
+            <div className="text-center">
+              <div className="w-12 h-12 mx-auto mb-3 bg-blue-500 group-hover:bg-blue-600 rounded-full flex items-center justify-center transition-colors duration-200">
+                <svg
+                  className="w-6 h-6 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-700 group-hover:text-blue-700 transition-colors duration-200">
+                Create New Proposal
+              </h3>
+              <p className="text-sm text-gray-500 mt-1">
+                Share your idea with the community
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Existing Proposals */}
         {proposals.map((proposal) => {
           const votePercentage = getVotePercentage(proposal.upVotes, proposal.totalVotes);
           
