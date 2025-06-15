@@ -1,36 +1,198 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🗳️ Democrazy
 
-## Getting Started
+> *Where democracy meets blockchain and Sherry makes it sweet!* 🍒
 
-First, run the development server:
+## 🎯 What is this magical thing?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Welcome to the most democratic corner of the blockchain! This is a **community governance platform** where anyone can submit proposals and the community votes on them. Think of it as Twitter polls, but on steroids and with actual consequences! 
+
+**Powered by [Sherry Social](https://sherry.social)** - because voting should be as smooth as your morning coffee ☕
+
+---
+
+## ✨ Features That'll Make You Go "Wow!"
+
+### 📝 **Proposal Creation**
+- Got a brilliant idea? Submit it to the blockchain!
+- Every proposal gets a unique ID (like a VIP pass)
+- Stored forever on Avalanche Fuji (because permanence is cool)
+
+### 🗳️ **Democratic Voting**
+- **👍 Upvote** if you love it
+- **👎 Downvote** if you... don't
+- One address, one vote (no cheating, Karen!)
+- Real-time vote counting because who has time to wait?
+
+### 🎨 **Beautiful UI**
+- Minimalistic cards that would make Apple jealous
+- Hover effects smoother than butter
+- Progress bars that actually make sense
+- Mobile-friendly because we're not animals
+
+### 🍒 **Sherry Social Integration** 
+**Here's where the magic happens!** 
+
+Instead of building another wallet connector that nobody wants, we use **Sherry Social** to handle all the Web3 complexity:
+- Click a proposal → Redirects to Sherry
+- Sherry handles wallet connection, transaction signing, and all that jazz
+- Users vote seamlessly without technical headaches
+- We focus on the fun stuff, Sherry handles the boring stuff
+
+*It's like having a blockchain butler! 🤵*
+
+---
+
+## 🚀 How It Works (The Simple Version)
+
+1. **Browse Proposals** 📋
+   - Open the app, see beautiful proposal cards
+   - Each shows vote counts, creator, and approval percentage
+
+2. **Click to Vote** 🖱️
+   - Click any proposal card
+   - Get redirected to `https://app.sherry.social/action?url=...`
+   - Sherry handles everything from there
+
+3. **Vote & Celebrate** 🎉
+   - Sherry prompts wallet connection
+   - Sign the transaction
+   - Your vote is recorded on-chain
+   - Democracy wins!
+
+---
+
+## 🔧 Smart Contract Functions
+
+Our contract is simple but powerful:
+
+```solidity
+// Create a new proposal
+createProposal(string _text) → returns proposalId
+
+// Vote on existing proposal  
+vote(uint256 _proposalId, bool _isUpVote)
+
+// Get proposal details
+getProposal(uint256 _proposalId) → (text, creator, timestamp, isActive)
+
+// Get vote counts
+getVoteCount(uint256 _proposalId) → (upVotes, downVotes)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*That's it! Sometimes simple is better than complex* 🤷‍♂️
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌐 API Endpoints
 
-## Learn More
+### `GET /api/proposals`
+Returns all active proposals with their juicy details:
+```json
+{
+  "proposals": [
+    {
+      "id": "0",
+      "text": "Make tacos the official food of the blockchain",
+      "creator": "0x...",
+      "upVotes": 42,
+      "downVotes": 3,
+      "totalVotes": 45
+    }
+  ]
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+### `GET /api/vote?proposal=ID`
+Returns Sherry-compatible metadata for voting interface
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### `POST /api/proposal?proposal=TEXT`
+Creates a new proposal (also Sherry-compatible)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🔥 Why This Rocks
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### ✅ **No Wallet Hassle**
+Thanks to Sherry, users don't need to:
+- Install MetaMask extensions
+- Figure out network configurations  
+- Copy-paste contract addresses
+- Decode transaction errors
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### ✅ **Just Works™️**
+- Click → Vote → Done
+- Clean, intuitive interface
+- Real blockchain interaction without the complexity
+
+### ✅ **Actually Decentralized**
+- Smart contracts on Avalanche Fuji
+- No central authority controlling votes
+- Transparent and immutable results
+
+---
+
+## 🛠️ Quick Start
+
+1. **Clone & Install**
+   ```bash
+   git clone <your-repo>
+   npm install
+   ```
+
+2. **Set Environment Variables**
+   ```bash
+   SMART_CONTRACT_ADDRESS=0x...
+   NEXT_PUBLIC_BASE_URL=http://localhost:3000
+   ```
+
+3. **Run It**
+   ```bash
+   npm run dev
+   ```
+
+4. **Create Proposals & Vote!**
+   - Open http://localhost:3000
+   - See your beautiful governance platform
+   - Click proposals to vote via Sherry
+
+---
+
+## 🎪 Fun Facts
+
+- **Built with Next.js 15** because we like living on the edge
+- **Styled with TailwindCSS** because life's too short for vanilla CSS
+- **Deployed on Avalanche Fuji** because we're environmentally conscious
+- **Powered by Sherry Social** because we're smart enough to use existing solutions
+
+---
+
+## 🤝 Contributing
+
+Found a bug? Have an idea? Want to make democracy even more democratic?
+
+1. Fork it 🍴
+2. Create your feature branch (`git checkout -b feature/make-voting-cooler`)
+3. Commit your changes (`git commit -m 'Add rainbow voting buttons'`)
+4. Push to the branch (`git push origin feature/make-voting-cooler`)
+5. Create a Pull Request 🚀
+
+---
+
+## 📜 License
+
+MIT License - because sharing is caring and blockchain is for everyone! 
+
+---
+
+## 🙏 Acknowledgments
+
+- **Sherry Social** for making Web3 UX not suck
+- **Avalanche** for cheap, fast transactions
+- **The Community** for actually caring about governance
+- **Coffee** for making this possible ☕
+
+---
+
+*Made with ❤️, ☕, and a healthy dose of "let's make voting fun again!"*
+
+**[Try it live](#) | [Check the contract](#) | [Visit Sherry Social](https://sherry.social)**
